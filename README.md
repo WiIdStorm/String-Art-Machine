@@ -31,7 +31,7 @@ The primary hardware and mechatronic components utilized in this project are lis
 ### 1. Controllers & Microcontrollers
 * **Microcontroller:** [ESP32-WROOM-32](https://documentation.espressif.com/esp32-wroom-32d_esp32-wroom-32u_datasheet_en.pdf) (Handles real-time motion control and sensor data processing).
 
-<img src="components/esp32-wroom-32d-wifi-ve-bluetooth-gelistirme-karti-1.jpg" width="300" alt="ESP32 WROOM 32">
+<img src="components/esp32-wroom-32d-wifi-ve-bluetooth-gelistirme-karti-1.jpg" width="270" alt="ESP32 WROOM 32">
 
 ### 2. Actuators, Drivers & Encoders
 * **Motor:** [NEMA23 Closed Loop Stepper Motor (CS-M22323)](https://www.damencnc.com/userdata/file/6023-3_Closed_Loop_Stepper_Motor_NEMA23-2.3Nm_CS-M22323_2D_Dimensions.pdf) (2.3 Nm) with integrated encoder to prevent step loss.
@@ -46,7 +46,7 @@ The primary hardware and mechatronic components utilized in this project are lis
 The system utilizes dedicated Switch Mode Power Supplies to separate power stages for stability:
 * **48V Supply:** [MT-500-48 SMPS](https://mervesanteknoloji.com/statics/file/MT-500-xx-_2.pdf) (48V, 10A) - Powering the main motor drivers.
 
-<img src="components/images-mt-500-48-48-volt-10-amper-smps-325.jpg" width="300" alt="48V 10A SMPS">
+<img src="components/images-mt-500-48-48-volt-10-amper-smps-325.jpg" width="250" alt="48V 10A SMPS">
 
 * **36V Supply:** [MT-350-36 SMPS](https://mervesanteknoloji.com/statics/file/2020-6-8_user_manual_MT-350-XX_2_1.pdf) (36V, 10A).
 
@@ -60,10 +60,10 @@ The system utilizes dedicated Switch Mode Power Supplies to separate power stage
 * **High-Power Buck Converters:** 3x [XL4016 DC-DC Step Down Regulator Modules](https://www.mikrocontroller.net/attachment/534859/XL4016_Step_Down_Buck_DC_DC_Converter.pdf) (300W, 10A).
   * *Note on Implementation:* One of these buck converters replaces a standard XL4016 module, as the high-capacity XL4016 was readily available and deployed to maintain power consistency across the logic and sensor circuits.
 
-<img src="components/XL4016%20300W%2010A%20DC-DC.jpg" width="300" alt="XL4016 Buck Converter">
+<img src="components/XL4016%20300W%2010A%20DC-DC.jpg" width="250" alt="XL4016 Buck Converter">
 <img src="components/4-38V%205A.jpg" width="300" alt="Alternative 4-38V 5A Module Reference">
 
 ### 5. Sensors & Position Tracking
 * **Optical Sensors:** [Optical Limit Switch Endstops](https://www.handsontec.com/dataspecs/sensor/Optical%20end%20stop.pdf) (Dimensions: 33 x 12 x 10 mm) used for precise homing, position validation, and path tracking.
 
-<img src="components/3d--optic-limit-switch-endstop-1.png" width="300" alt="Optical Limit Switch Endstop">
+<img src="components/3d--optic-limit-switch-endstop-1.png" width="260" alt="Optical Limit Switch Endstop">
