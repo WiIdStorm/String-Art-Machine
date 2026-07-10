@@ -63,9 +63,9 @@ The system utilizes dedicated Switch Mode Power Supplies to separate power stage
 <img src="components/XL4016%20300W%2010A%20DC-DC.jpg" width="250" alt="XL4016 Buck Converter">
 
 * **XL4016:**
-<img src="components/4-38V%205A.jpg" width="300" alt="Alternative 4-38V 5A Module Reference">
+<img src="components/4-38V%205A.jpg" width="250" alt="Alternative 4-38V 5A Module Reference">
 
 ### 5. Sensors & Position Tracking
 * **Optical Sensors:** [Optical Limit Switch Endstops](https://www.handsontec.com/dataspecs/sensor/Optical%20end%20stop.pdf) (Dimensions: 33 x 12 x 10 mm) used for precise homing, position validation, and path tracking.
 
-<img src="components/3d--optic-limit-switch-endstop-1.png" width="260" alt="Optical Limit Switch Endstop">
+<img src="components/3d--optic-limit-switch-endstop-1.png" width="250" alt="Optical Limit Switch Endstop">
