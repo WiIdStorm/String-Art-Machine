@@ -5,7 +5,7 @@ An automated String Art machine that performs both the automated nailing process
 
 This project presents an automated String Art machine designed to handle both the automated nailing and string weaving processes. The system architecture integration and control flow are built upon the following core components:
 
-* **Control Unit & Embedded System:** Powered by an **ESP32-WROOM-32d** microcontroller managing real-time motion control, sensor data processing, and execution commands.
+* **Control Unit & Embedded System:** Powered by an **ESP32-WROOM-32** microcontroller managing real-time motion control, sensor data processing, and execution commands.
 * **Software & Image Processing:** A **Python**-based framework is utilized to convert digital source images into optimized string-path coordinates and numerical control data.
 * **Position Tracking & Feedback System:** To ensure high-precision positioning and prevent accumulative mechanical errors during operation, the system employs a robust feedback mechanism:
   * A **NEMA23 Closed-Loop Stepper Motor** with an integrated encoder to prevent step loss.
@@ -29,9 +29,9 @@ This project presents an automated String Art machine designed to handle both th
 The primary hardware and mechatronic components utilized in this project are listed below along with their corresponding visual documentation and technical reference links:
 
 ### 1. Controllers & Microcontrollers
-* **Microcontroller:** [ESP32-WROOM-32](https://documentation.espressif.com/esp32-wroom-32d_esp32-wroom-32u_datasheet_en.pdf) (Handles real-time motion control and sensor data processing).
+* **Microcontroller:** [ESP32-WROOM-32]([https://documentation.espressif.com/esp32-wroom-32d_esp32-wroom-32u_datasheet_en.pdf](https://documentation.espressif.com/esp32-wroom-32_datasheet_en.pdf)) (Handles real-time motion control and sensor data processing).
 
-<img src="components/esp32-wroom-32d-wifi-ve-bluetooth-gelistirme-karti-1.jpg" width="270" alt="ESP32 WROOM 32">
+<img src="components/esp32-wroom-wifi-ve-bluetooth-modulu-38-pin-type-c-robolink-market-4711-70-O.jpg" width="270" alt="ESP32 WROOM 32">
 
 ### 2. Actuators, Drivers & Encoders
 * **Motor:** [NEMA23 Closed Loop Stepper Motor (CS-M22323)](https://www.damencnc.com/userdata/file/6023-3_Closed_Loop_Stepper_Motor_NEMA23-2.3Nm_CS-M22323_2D_Dimensions.pdf) (2.3 Nm) with integrated encoder to prevent step loss.
