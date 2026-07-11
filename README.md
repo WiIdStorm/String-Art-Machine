@@ -5,7 +5,7 @@ An automated String Art machine that performs both the automated nailing process
 
 This project presents an automated String Art machine designed to handle both the automated nailing and string weaving processes. The system architecture integration and control flow are built upon the following core components:
 
-* **Control Unit & Embedded System:** Powered by an **ESP32-WROOM-32d** microcontroller managing real-time motion control, sensor data processing, and execution commands.
+* **Control Unit & Embedded System:** Powered by an **ESP32-WROOM-32** microcontroller managing real-time motion control, sensor data processing, and execution commands.
 * **Software & Image Processing:** A **Python**-based framework is utilized to convert digital source images into optimized string-path coordinates and numerical control data.
 * **Position Tracking & Feedback System:** To ensure high-precision positioning and prevent accumulative mechanical errors during operation, the system employs a robust feedback mechanism:
   * A **NEMA23 Closed-Loop Stepper Motor** with an integrated encoder to prevent step loss.
@@ -71,28 +71,28 @@ The following custom parts were designed for the physical construction of the ma
 
 * **Drill Main Unit:** Core housing for the drilling mechanism.
   * **File:** [`drill_main_unit.step`](./solid/drill_main_unit.step)
-  * *[Drill Main Unit Screenshot Here]*
+  <img src="solid/drill_main_unit.png" width="600" alt="Top View Technical Drawing">
 
 * **Drill Mounting Rod:** Structural support component for the drill unit.
   * **File:** [`drill_mounting_rod.step`](./solid/drill_mounting_rod.step)
-  * *[Drill Mounting Rod Screenshot Here]*
+  <img src="solid/drill_mounting_rod.png" width="600" alt="Top View Technical Drawing">
 
 * **Drill Servo Gear:** Transmission gear for the servo-actuated mechanism.
   * **File:** [`drill_servo_gear.step`](./solid/drill_servo_gear.step)
-  * *[Drill Servo Gear Screenshot Here]*
+  <img src="solid/drill_servo_gear.png" width="600" alt="Top View Technical Drawing">
 
 * **Motor Mount:** Bracket designed to secure the NEMA23 closed-loop stepper motors.
   * **File:** [`motor_mount.step`](./solid/motor_mount.step)
-  * *[Motor Mount Screenshot Here]*
+  <img src="solid/motor_mount.png" width="600" alt="Top View Technical Drawing">
 
 * **Slider End:** End effector and guide component for the linear motion axis.
   * **File:** [`slider_end.step`](./solid/slider_end.step)
-  * *[Slider End Screenshot Here]*
+  <img src="solid/slider_end.png" width="600" alt="Top View Technical Drawing">
 
 * **Chassis:** The primary structural frame supporting the entire operation.
   * **File:** [`chassis.step`](./solid/chassis.step)
-  * *[Chassis Screenshot Here]*
+  <img src="solid/chassis.png" width="600" alt="Top View Technical Drawing">
 
 * **Table / Bed:** The main work surface where the string art generation takes place.
   * **File:** [`table_bed.step`](./solid/frame.step)
-  * *[Frame Screenshot Here]*
+  <img src="solid/frame.png" width="600" alt="Top View Technical Drawing">
