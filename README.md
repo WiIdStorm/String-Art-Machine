@@ -29,7 +29,7 @@ This project presents an automated String Art machine designed to handle both th
 The primary hardware and mechatronic components utilized in this project are listed below along with their corresponding visual documentation and technical reference links:
 
 ### 1. Controllers & Microcontrollers
-* **Microcontroller:** [ESP32-WROOM-32]([https://documentation.espressif.com/esp32-wroom-32d_esp32-wroom-32u_datasheet_en.pdf](https://documentation.espressif.com/esp32-wroom-32_datasheet_en.pdf)) (Handles real-time motion control and sensor data processing).
+* **Microcontroller:** [ESP32-WROOM-32](https://documentation.espressif.com/esp32-wroom-32d_esp32-wroom-32u_datasheet_en.pdf](https://documentation.espressif.com/esp32-wroom-32_datasheet_en.pdf)(Handles real-time motion control and sensor data processing).
 
 <img src="components/esp32-wroom-wifi-ve-bluetooth-modulu-38-pin-type-c-robolink-market-4711-70-O.jpg" width="270" alt="ESP32 WROOM 32">
 
