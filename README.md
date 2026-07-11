@@ -63,36 +63,36 @@ The mechanical structure of the String Art machine is detailed in this section. 
 
 ### 1. System Overview (Top View)
 The main layout of the system, illustrating the positioning and integration of the mechanical and electronic sub-assemblies, is provided below.
-* **Top View Drawing:** [`drawing top view.pdf`](./drawing_top_view.pdf)
-* *[Top View Ekran Görüntüsü veya Render Buraya Gelecek]*
+* **Top View Drawing:** [`drawing_top_view.pdf`](./solid/drawing_top_view.pdf)
+<img src="solid/drawing_top_view.png" width="600" alt="Top View Technical Drawing">
 
 ### 2. Custom Components
 The following custom parts were designed for the physical construction of the machine. Universal `.step` files are provided for replication, alongside visual references for each component.
 
 * **Drill Main Unit:** Core housing for the drilling mechanism.
-  * **File:** [`Matkap_Ana_unite.step`](./Matkap_Ana_unite.step)
-  * *[Matkap_Ana_unite Ekran Görüntüsü Buraya Gelecek]*
+  * **File:** [`drill_main_unit.step`](./solid/drill_main_unit.step)
+  * *[Drill Main Unit Screenshot Here]*
 
 * **Drill Mounting Rod:** Structural support component for the drill unit.
-  * **File:** [`Matkap_montaj_cubugu.step`](./Matkap_montaj_cubugu.step)
-  * *[Matkap_montaj_cubugu Ekran Görüntüsü Buraya Gelecek]*
+  * **File:** [`drill_mounting_rod.step`](./solid/drill_mounting_rod.step)
+  * *[Drill Mounting Rod Screenshot Here]*
 
 * **Drill Servo Gear:** Transmission gear for the servo-actuated mechanism.
-  * **File:** [`Matkap_servo_dislisi.step`](./Matkap_servo_dislisi.step)
-  * *[Matkap_servo_dislisi Ekran Görüntüsü Buraya Gelecek]*
+  * **File:** [`drill_servo_gear.step`](./solid/drill_servo_gear.step)
+  * *[Drill Servo Gear Screenshot Here]*
 
 * **Motor Mount:** Bracket designed to secure the NEMA23 closed-loop stepper motors.
-  * **File:** [`Motor_tutucu.step`](./Motor_tutucu.step)
-  * *[Motor_tutucu Ekran Görüntüsü Buraya Gelecek]*
+  * **File:** [`motor_mount.step`](./solid/motor_mount.step)
+  * *[Motor Mount Screenshot Here]*
 
 * **Slider End:** End effector and guide component for the linear motion axis.
-  * **File:** [`Slider_ucu.step`](./Slider_ucu.step)
-  * *[Slider_ucu Ekran Görüntüsü Buraya Gelecek]*
+  * **File:** [`slider_end.step`](./solid/slider_end.step)
+  * *[Slider End Screenshot Here]*
 
 * **Chassis:** The primary structural frame supporting the entire operation.
-  * **File:** [`Sase (1).step`](./Sase (1).step)
-  * *[Şase Ekran Görüntüsü Buraya Gelecek]*
+  * **File:** [`chassis.step`](./solid/chassis.step)
+  * *[Chassis Screenshot Here]*
 
 * **Table / Bed:** The main work surface where the string art generation takes place.
-  * **File:** [`Tabla (2).step`](./Tabla (2).step)
-  * *[Tabla Ekran Görüntüsü Buraya Gelecek]*
+  * **File:** [`table_bed.step`](./solid/frame.step)
+  * *[Frame Screenshot Here]*
