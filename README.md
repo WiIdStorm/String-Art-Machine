@@ -5,19 +5,6 @@ An automated String Art machine that performs both the automated nailing process
 
 This project presents an automated String Art machine designed to handle both the automated nailing and string weaving processes. The system architecture integration and control flow are built upon the following core components:
 
-* **Control Unit & Embedded System:** Powered by an **ESP32-WROOM-32** microcontroller managing real-time motion control, sensor data processing, and execution commands.
-* **Software & Image Processing:** A **Python**-based framework is utilized to convert digital source images into optimized string-path coordinates and numerical control data.
-* **Position Tracking & Feedback System:** To ensure high-precision positioning and prevent accumulative mechanical errors during operation, the system employs a robust feedback mechanism:
-  * A **NEMA23 Closed-Loop Stepper Motor** with an integrated encoder to prevent step loss.
-  * **Optical Limit Switch Endstops** serving as red-light sensors for precise homing, position validation, and path tracking.
-
-# String-Art-Machine
-An automated String Art machine that performs both the automated nailing process and the string weaving process.
-
-## Introduction
-
-This project presents an automated String Art machine designed to handle both the automated nailing and string weaving processes. The system architecture integration and control flow are built upon the following core components:
-
 * **Control Unit & Embedded System:** Powered by an **ESP32-WROOM-32d** microcontroller managing real-time motion control, sensor data processing, and execution commands.
 * **Software & Image Processing:** A **Python**-based framework is utilized to convert digital source images into optimized string-path coordinates and numerical control data.
 * **Position Tracking & Feedback System:** To ensure high-precision positioning and prevent accumulative mechanical errors during operation, the system employs a robust feedback mechanism:
@@ -29,7 +16,7 @@ This project presents an automated String Art machine designed to handle both th
 The primary hardware and mechatronic components utilized in this project are listed below along with their corresponding visual documentation and technical reference links:
 
 ### 1. Controllers & Microcontrollers
-* **Microcontroller:** [ESP32-WROOM-32](https://documentation.espressif.com/esp32-wroom-32_datasheet_en.pdf).(Handles real-time motion control and sensor data processing)
+* **Microcontroller:** [ESP32-WROOM-32](https://documentation.espressif.com/esp32-wroom-32_datasheet_en.pdf)(Handles real-time motion control and sensor data processing)
 
 <img src="components/esp32-wroom-wifi-ve-bluetooth-modulu-38-pin-type-c-robolink-market-4711-70-O.jpg" width="270" alt="ESP32 WROOM 32">
 
@@ -69,3 +56,43 @@ The system utilizes dedicated Switch Mode Power Supplies to separate power stage
 * **Optical Sensors:** [Optical Limit Switch Endstops](https://www.handsontec.com/dataspecs/sensor/Optical%20end%20stop.pdf) (Dimensions: 33 x 12 x 10 mm) used for precise homing, position validation, and path tracking.
 
 <img src="components/3d--optic-limit-switch-endstop-1.png" width="250" alt="Optical Limit Switch Endstop">
+
+## Mechanical Design & Assembly
+
+The mechanical structure of the String Art machine is detailed in this section. The design progresses from the top-level system assembly down to the individual custom-designed components.
+
+### 1. System Overview (Top View)
+The main layout of the system, illustrating the positioning and integration of the mechanical and electronic sub-assemblies, is provided below.
+* **Top View Drawing:** [`drawing top view.pdf`](./drawing_top_view.pdf)
+* *[Top View Ekran Görüntüsü veya Render Buraya Gelecek]*
+
+### 2. Custom Components
+The following custom parts were designed for the physical construction of the machine. Universal `.step` files are provided for replication, alongside visual references for each component.
+
+* **Drill Main Unit:** Core housing for the drilling mechanism.
+  * **File:** [`Matkap_Ana_unite.step`](./Matkap_Ana_unite.step)
+  * *[Matkap_Ana_unite Ekran Görüntüsü Buraya Gelecek]*
+
+* **Drill Mounting Rod:** Structural support component for the drill unit.
+  * **File:** [`Matkap_montaj_cubugu.step`](./Matkap_montaj_cubugu.step)
+  * *[Matkap_montaj_cubugu Ekran Görüntüsü Buraya Gelecek]*
+
+* **Drill Servo Gear:** Transmission gear for the servo-actuated mechanism.
+  * **File:** [`Matkap_servo_dislisi.step`](./Matkap_servo_dislisi.step)
+  * *[Matkap_servo_dislisi Ekran Görüntüsü Buraya Gelecek]*
+
+* **Motor Mount:** Bracket designed to secure the NEMA23 closed-loop stepper motors.
+  * **File:** [`Motor_tutucu.step`](./Motor_tutucu.step)
+  * *[Motor_tutucu Ekran Görüntüsü Buraya Gelecek]*
+
+* **Slider End:** End effector and guide component for the linear motion axis.
+  * **File:** [`Slider_ucu.step`](./Slider_ucu.step)
+  * *[Slider_ucu Ekran Görüntüsü Buraya Gelecek]*
+
+* **Chassis:** The primary structural frame supporting the entire operation.
+  * **File:** [`Sase (1).step`](./Sase (1).step)
+  * *[Şase Ekran Görüntüsü Buraya Gelecek]*
+
+* **Table / Bed:** The main work surface where the string art generation takes place.
+  * **File:** [`Tabla (2).step`](./Tabla (2).step)
+  * *[Tabla Ekran Görüntüsü Buraya Gelecek]*
