@@ -59,10 +59,10 @@ The system utilizes dedicated Switch Mode Power Supplies to separate power stage
 ### 4. Voltage Regulation (DC-DC Step-Down)
 * **High-Power Buck Converters:** 3x [XL4016 DC-DC Step Down Regulator Modules](https://www.mikrocontroller.net/attachment/534859/XL4016_Step_Down_Buck_DC_DC_Converter.pdf) (300W, 10A).
   * *Note on Implementation:* One of these buck converters replaces a standard XL4016 module, as the high-capacity XL4016 was readily available and deployed to maintain power consistency across the logic and sensor circuits.
-
+* **XL4016 300w:**
 <img src="components/XL4016%20300W%2010A%20DC-DC.jpg" width="250" alt="XL4016 Buck Converter">
 
-* **XL4016:**
+* **XL4016 200w:**
 <img src="components/4-38V%205A.jpg" width="250" alt="Alternative 4-38V 5A Module Reference">
 
 ### 5. Sensors & Position Tracking
