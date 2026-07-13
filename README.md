@@ -46,11 +46,10 @@ The system utilizes dedicated Switch Mode Power Supplies to separate power stage
 ### 4. Voltage Regulation (DC-DC Step-Down)
 * **High-Power Buck Converters:** 3x [XL4016 DC-DC Step Down Regulator Modules](https://www.mikrocontroller.net/attachment/534859/XL4016_Step_Down_Buck_DC_DC_Converter.pdf) (300W, 10A).
   * *Note on Implementation:* One of these buck converters replaces a standard XL4016 module, as the high-capacity XL4016 was readily available and deployed to maintain power consistency across the logic and sensor circuits.
-* **XL4016 300w:**
-<img src="components/XL4016%20300W%2010A%20DC-DC.jpg" width="250" alt="XL4016 Buck Converter">
 
-* **XL4016 200w:**
-<img src="components/4-38V%205A.jpg" width="250" alt="Alternative 4-38V 5A Module Reference">
+| XL4016 300w | XL4016 200w |
+| :---: | :---: |
+| <img src="components/XL4016%20300W%2010A%20DC-DC.jpg" width="250"> | <img src="components/4-38V%205A.jpg" width="250"> |
 
 ### 5. Sensors & Position Tracking
 * **Optical Sensors:** [Optical Limit Switch Endstops](https://www.handsontec.com/dataspecs/sensor/Optical%20end%20stop.pdf) (Dimensions: 33 x 12 x 10 mm) used for precise homing, position validation, and path tracking.
@@ -63,36 +62,150 @@ The mechanical structure of the String Art machine is detailed in this section. 
 
 ### 1. System Overview (Top View)
 The main layout of the system, illustrating the positioning and integration of the mechanical and electronic sub-assemblies, is provided below.
-* **Top View Drawing:** [`drawing_top_view.pdf`](./solid/drawing_top_view.pdf)
-<img src="solid/drawing_top_view.png" width="600" alt="Top View Technical Drawing">
 
+<img src="solid/drawing_top_view.png" width="500" alt="Top View Technical Drawing">
+
+* **Top View Drawing:** [`drawing_top_view.pdf`](./solid/drawing_top_view.pdf)
 ### 2. Custom Components
 The following custom parts were designed for the physical construction of the machine. Universal `.step` files are provided for replication, alongside visual references for each component.
 
 * **Drill Main Unit:** Core housing for the drilling mechanism.
+  
+  <img src="solid/drill_main_unit.png" width="500" alt="Top View Technical Drawing">
+
   * **File:** [`drill_main_unit.step`](./solid/drill_main_unit.step)
-  <img src="solid/drill_main_unit.png" width="600" alt="Top View Technical Drawing">
-
 * **Drill Mounting Rod:** Structural support component for the drill unit.
+  
+  <img src="solid/drill_mounting_rod.png" width="500" alt="Drill Mounting Rod">
+
   * **File:** [`drill_mounting_rod.step`](./solid/drill_mounting_rod.step)
-  <img src="solid/drill_mounting_rod.png" width="600" alt="Top View Technical Drawing">
-
 * **Drill Servo Gear:** Transmission gear for the servo-actuated mechanism.
+
+  <img src="solid/drill_servo_gear.png" width="500" alt="Drill Servo Gear">
+
   * **File:** [`drill_servo_gear.step`](./solid/drill_servo_gear.step)
-  <img src="solid/drill_servo_gear.png" width="600" alt="Top View Technical Drawing">
-
 * **Motor Mount:** Bracket designed to secure the NEMA23 closed-loop stepper motors.
+  
+  <img src="solid/motor_mount.png" width="500" alt="Motor Mount">
+
   * **File:** [`motor_mount.step`](./solid/motor_mount.step)
-  <img src="solid/motor_mount.png" width="600" alt="Top View Technical Drawing">
-
 * **Slider End:** End effector and guide component for the linear motion axis.
+  
+  <img src="solid/slider_end.png" width="500" alt="Slider End">
+
   * **File:** [`slider_end.step`](./solid/slider_end.step)
-  <img src="solid/slider_end.png" width="600" alt="Top View Technical Drawing">
-
 * **Chassis:** The primary structural frame supporting the entire operation.
-  * **File:** [`chassis.step`](./solid/chassis.step)
-  <img src="solid/chassis.png" width="600" alt="Top View Technical Drawing">
+ 
+  <img src="solid/chassis.png" width="500" alt="Chassis">
 
+  * **File:** [`chassis.step`](./solid/chassis.step)
 * **Table / Bed:** The main work surface where the string art generation takes place.
-  * **File:** [`table_bed.step`](./solid/frame.step)
-  <img src="solid/frame.png" width="600" alt="Top View Technical Drawing">
+  
+  <img src="solid/frame.png" width="500" alt="Frame">
+
+   * **File:** [`table_bed.step`](./solid/frame.step)
+
+## System Wiring & Schematics
+
+To ensure system stability, prevent step loss, and protect the low-voltage microcontroller components, the electrical architecture is divided into three isolated stages. 
+
+*(Note: Ensure all sub-schematics share a physical **Common GND** network to prevent signal noise).*
+
+### 1. Power Distribution Layout
+This schematic maps the AC-to-DC power routing, voltage regulation stages, and the common ground network.
+
+**Components to include and wire in this diagram:**
+* **AC Mains Input:** 220V AC Grid ($L, N, \text{PE}$).
+* **Main SMPS Units:** 
+  * MT-500-48 SMPS (48V, 10A)
+  * MT-350-36 SMPS (36V, 10A)
+  * Mervesan MT-250-24 SMPS (24V, 10A)
+* **DC-DC Step-Down Stages:**
+  * XL4016 Buck Converter 1 (Configured for 5V Logic/Sensor Power)
+  * XL4016 Buck Converter 2 (Configured for 3.3V ESP32 Power)
+* **Power Terminals:** Main Common GND Busbar.
+
+<img src="schematics/power_distribution.png" width="600" alt="Power Distribution Layout">
+
+---
+
+### 2. Logic Level Shifting & MCU Interface
+This schematic details the control signal pathways between the low-voltage microcontroller and the industrial, high-voltage peripheral interfaces.
+
+**Components to include and wire in this diagram:**
+* **Microcontroller:** ESP32-WROOM-32 (3.3V Logic).
+* **Signal Converters:** 4-Channel Bi-directional Logic Level Shifter (3.3V to 5V).
+* **Industrial Motor Drivers (Control Sides):**
+  * CS-D508 Stepper Driver (`PUL`, `DIR`, `ENA` inputs)
+  * Dedicated Nailing Motor Driver (`PUL/DIR` or PWM control inputs)
+  * Dedicated Stringing Motor Driver (`PUL/DIR` or PWM control inputs)
+* **Position Feedback Sensors:** Optical Limit Switch Endstops (Homing & Path Tracking).
+
+<img src="schematics/logic_interface.png" width="600" alt="Signal Conversion Schematic">
+
+---
+
+### 3. Actuators & Closed-Loop Feedback Wiring
+This schematic documents the high-current drive outputs, motor phase connections, and hardware-level encoder feedback loops.
+
+**Components to include and wire in this diagram:**
+* **Main Motion Driver:** CS-D508 Stepper Driver (Power & Motor terminals).
+* **Main Actuator:** NEMA23 Closed-Loop Stepper Motor (CS-M22323).
+* **Feedback Loop:** Integrated Encoder (Motor rear) to CS-D508 Encoder Port connection.
+* **Auxiliary Drivers:** 
+  * Nailing Motor Driver (Power & Output terminals)
+  * Stringing Motor Driver (Power & Output terminals)
+* **Auxiliary Actuators:**
+  * Nailing Motor Mechanism
+  * Stringing Motor Mechanism
+
+<img src="schematics/actuator_wiring.png" width="600" alt="Actuator Control Wiring Diagram">
+
+
+
+
+
+## System Integration & Real-World Assembly
+
+This section documents the physical construction of the String Art machine, showcasing the integration of mechanical parts, electronics, and the execution of the main automated processes.
+
+### 1. Component Placement & Wiring
+* **Power Supply & Motor Installation:** The physical layout of the main power distribution (48V, 36V, 24V SMPS) alongside the NEMA23 Closed-Loop Stepper Motor and its driver.
+
+  <img src="real/powers and motor.jpeg" width="400" alt="Power Supply and Motor Placement">
+
+* **Mobility & Chassis Support:** The real-world installation of the caster wheel, ensuring chassis mobility and proper leveling during operation.
+* 
+  <img src="real/caster.jpeg" width="400" alt="Caster Wheel Installation">
+
+### 2. Operational Stages
+* **Automated Nailing Process:** The end-effector drilling and placing nails into the table bed.
+* 
+  <img src="components/real_nailing_process.jpg" width="400" alt="Automated Nailing Process">
+
+* **String Weaving Process:** The automated routing of the string across the predefined coordinate paths.
+* 
+  <img src="components/real_stringing_process.jpg" width="400" alt="String Weaving Process">
+
+---
+
+## Software Architecture & Algorithm Breakdown
+
+This section documents the software framework and the core image-to-string processing pipeline. The complete source code files are hosted directly within the repository files.
+
+### 1. Image Processing & String Generation Pipeline
+The **Python**-based framework processes digital source images, applies localized optimization algorithms, and generates numerical control paths for the ESP32 microcontroller.
+
+**Key Software Modules & Operations to Document:**
+* **Image Pre-processing Module:** Grayscale conversion, contrast adjustment, and cropping filters.
+* **Algorithm Core:** Calculations mapping string density, line intersections, and nail-to-nail path sequences.
+* **Data Exporter:** Generation of numerical control data arrays and transmission protocols sent to the ESP32.
+
+### 2. Algorithmic Transformation (Sample Input vs. Output)
+Below is a visual representation of how the Python pipeline transforms a standard raster image into a vector-mapped string-art pattern:
+
+| Source Input Image (Girdi) | Algorithmic String Output (Çıktı) |
+| :---: | :---: |
+| <img src="images/sample_input.jpg" width="350" alt="Original Input Image"> | <img src="images/sample_output.png" width="350" alt="Generated String Art Result"> |
+
+---
