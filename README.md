@@ -20,6 +20,10 @@ The primary hardware and mechatronic components utilized in this project are lis
 
 <img src="components/esp32-wroom-wifi-ve-bluetooth-modulu-38-pin-type-c-robolink-market-4711-70-O.jpg" width="270" alt="ESP32 WROOM 32">
 
+* **Signal Converters:** [MAX485 / RS485-TTL Module](https://login.pcbpower.com/Documents/0252d3ac-d61f-43a7-9b96-010299e5181c/PM14058.pdf) (Converts RS485 differential signals from encoders into TTL logic for the ESP32)
+
+<img src="components/RS485.png" width="270" alt="ESP32 WROOM 32">
+
 ### 2. Actuators, Drivers & Encoders
 * **Motor:** [NEMA23 Closed Loop Stepper Motor (CS-M22323)](https://www.damencnc.com/userdata/file/6023-3_Closed_Loop_Stepper_Motor_NEMA23-2.3Nm_CS-M22323_2D_Dimensions.pdf) (2.3 Nm) with integrated encoder to prevent step loss.
 
@@ -28,6 +32,14 @@ The primary hardware and mechatronic components utilized in this project are lis
 * **Driver:** [CS-D508 Encoder-Integrated Stepper Motor Driver](http://leadshineusa.com/UploadFile/Down/CS-D508_m3.1.pdf) (24-48V).
 
 <img src="components/cs-d508-enkoderli-step-motor-surucu-yst.jpg" width="260" alt="CS-D508 Motor Driver">
+
+* **Drill Motor:** [RS-775 DC Motor](https://www.handsontec.com/dataspecs/motor_fan/775-Motor.pdf) (High-torque DC motor driving the drilling mechanism).
+
+<img src="components/rs-775.png" width="260" alt="CS-D508 Motor Driver">
+
+* **Servos:** [MG995 TowerPro Metal Gear Servo](https://www.electronicoscaldas.com/datasheet/MG995_Tower-Pro.pdf) (High-torque servos used for the drill depth actuation and slider mechanisms).
+
+<img src="components/MG995.jpg" width="260" alt="CS-D508 Motor Driver">
 
 ### 3. Power Supplies (SMPS)
 The system utilizes dedicated Switch Mode Power Supplies to separate power stages for stability:
@@ -105,64 +117,54 @@ The following custom parts were designed for the physical construction of the ma
 
    * **File:** [`table_bed.step`](./solid/frame.step)
 
-## System Wiring & Schematics
+## System Wiring & Connections
 
 To ensure system stability, prevent step loss, and protect the low-voltage microcontroller components, the electrical architecture is divided into three isolated stages. 
 
-*(Note: Ensure all sub-schematics share a physical **Common GND** network to prevent signal noise).*
+*(Note: Ensure all sub-systems share a physical **Common GND** network to prevent signal noise).*
 
 ### 1. Power Distribution Layout
-This schematic maps the AC-to-DC power routing, voltage regulation stages, and the common ground network.
+This section details the AC-to-DC power routing, voltage regulation stages, and the common ground network used to power the system.
 
-**Components to include and wire in this diagram:**
-* **AC Mains Input:** 220V AC Grid ($L, N, \text{PE}$).
-* **Main SMPS Units:** 
-  * MT-500-48 SMPS (48V, 10A)
-  * MT-350-36 SMPS (36V, 10A)
-  * Mervesan MT-250-24 SMPS (24V, 10A)
-* **DC-DC Step-Down Stages:**
-  * XL4016 Buck Converter 1 (Configured for 5V Logic/Sensor Power)
-  * XL4016 Buck Converter 2 (Configured for 3.3V ESP32 Power)
-* **Power Terminals:** Main Common GND Busbar.
-
-<img src="schematics/power_distribution.png" width="600" alt="Power Distribution Layout">
-
----
+* **AC Mains Input:** 220V AC grid ($L, N, \text{PE}$) supplies power to the primary SMPS units.
+* **Main SMPS Units (Power Supply):** 
+  * **MT-500-48 SMPS (48V, 10A):** Dedicated to powering the main NEMA23 closed-loop stepper motor driver (CS-D508).
+  * **MT-350-36 SMPS (36V, 10A):** Supplies power for the auxiliary motor drivers.
+  * **Mervesan MT-250-24 SMPS (24V, 10A):** Provides base voltage for DC motor drivers and DC-DC step-down modules.
+* **DC-DC Step-Down Stages (Voltage Regulation):**
+  * **XL4016 Buck Converter 1:** Steps down voltage to **5V** to supply logic power for sensors, encoders, servos, and level shifters.
+  * **XL4016 Buck Converter 2:** Steps down voltage to **3.3V** to power the ESP32 microcontroller.
 
 ### 2. Logic Level Shifting & MCU Interface
-This schematic details the control signal pathways between the low-voltage microcontroller and the industrial, high-voltage peripheral interfaces.
+This section details the control signal pathways and pin mappings between the low-voltage ESP32 and the 5V peripheral interfaces.
 
-**Components to include and wire in this diagram:**
-* **Microcontroller:** ESP32-WROOM-32 (3.3V Logic).
-* **Signal Converters:** 4-Channel Bi-directional Logic Level Shifter (3.3V to 5V).
-* **Industrial Motor Drivers (Control Sides):**
-  * CS-D508 Stepper Driver (`PUL`, `DIR`, `ENA` inputs)
-  * Dedicated Nailing Motor Driver (`PUL/DIR` or PWM control inputs)
-  * Dedicated Stringing Motor Driver (`PUL/DIR` or PWM control inputs)
-* **Position Feedback Sensors:** Optical Limit Switch Endstops (Homing & Path Tracking).
+The ESP32 operates at a **3.3V logic level**. Level shifters are dedicated specifically to stepping down **5V signal outputs** (such as encoder receiver outputs, sensor signals, and driver feedback) down to **3.3V** to protect the ESP32 GPIO pins, while control output signals are driven directly from the microcontroller.
 
-<img src="schematics/logic_interface.png" width="600" alt="Signal Conversion Schematic">
+| Component | Signal Type | ESP32 Pin (3.3V) | Level Shifter Direction | Peripheral Pin (5V) |
+| :--- | :--- | :---: | :---: | :--- |
+| **Stepper Driver (CS-D508)** | Pulse | `P18` | Direct (3.3V) | `PUL+` (Blue) |
+| | Direction | `P19` | Direct (3.3V) | `DIR+` (Brown) |
+| | Enable | `P17` | Direct (3.3V) | `ENA+` (Green) |
+| | Alarm | `P16` | 5V $\rightarrow$ 3.3V | `ALM+` (Orange) |
+| **DC Motor Driver (BTS7960)**| Forward PWM | `P26` | Direct (3.3V) | `RPWM` |
+| | Reverse PWM | `P27` | Direct (3.3V) | `LPWM` |
+| | Right Enable | `P25` | Direct (3.3V) | `R_EN` |
+| | Left Enable | `P25` | Direct (3.3V) | `L_EN` |
+| **Servos (MG995)** | Drill PWM | `P21` | Direct (3.3V) | Signal (Drill Servo) |
+| | Slider PWM | `P14` | Direct (3.3V) | Signal (Slider Servo) |
+| **Encoders (RS485-TTL)** | Encoder 1 (RO) | `P22` | 5V $\rightarrow$ 3.3V | `RO` (Green/Red) |
+| | Encoder 2 (RO) | `P23` | 5V $\rightarrow$ 3.3V | `RO` (Yellow/Blue) |
+| **Sensors** | Optical Sensor | `P32` | 5V $\rightarrow$ 3.3V | Signal Output |
 
----
+### 3. Actuators & Closed-Loop Feedback Connections
+This section outlines the high-current drive outputs, motor phase connections, and hardware-level feedback routing.
 
-### 3. Actuators & Closed-Loop Feedback Wiring
-This schematic documents the high-current drive outputs, motor phase connections, and hardware-level encoder feedback loops.
-
-**Components to include and wire in this diagram:**
-* **Main Motion Driver:** CS-D508 Stepper Driver (Power & Motor terminals).
-* **Main Actuator:** NEMA23 Closed-Loop Stepper Motor (CS-M22323).
-* **Feedback Loop:** Integrated Encoder (Motor rear) to CS-D508 Encoder Port connection.
-* **Auxiliary Drivers:** 
-  * Nailing Motor Driver (Power & Output terminals)
-  * Stringing Motor Driver (Power & Output terminals)
-* **Auxiliary Actuators:**
-  * Nailing Motor Mechanism
-  * Stringing Motor Mechanism
-
-<img src="schematics/actuator_wiring.png" width="600" alt="Actuator Control Wiring Diagram">
-
-
-
+* **Main Motion Control:**
+  * The **CS-D508 Stepper Driver** receives power from the 48V SMPS and outputs high-current drive signals to the **NEMA23 Closed-Loop Stepper Motor (CS-M22323)** phases.
+  * **Feedback Loop:** The integrated encoder on the rear of the NEMA23 motor routes directly back to the dedicated feedback port on the CS-D508 driver. This ensures hardware-level correction to prevent step loss without adding processing overhead to the ESP32.
+* **Auxiliary Actuation (Nailing & Stringing Mechanisms):**
+  * The **BTS7960 DC Motor Driver** controls the **RS-775 DC Motor** for high-torque operations (such as the drilling/nailing spindle).
+  * The **MG995 Servos** draw power from the 5V regulated line and receive direct PWM signals from the ESP32 to actuate the slider and depth mechanisms.
 
 
 ## System Integration & Real-World Assembly
