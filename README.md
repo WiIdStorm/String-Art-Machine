@@ -171,27 +171,52 @@ This section outlines the high-current drive outputs, motor phase connections, a
 
 This section documents the physical construction of the String Art machine, showcasing the integration of mechanical parts, electronics, and the execution of the main automated processes.
 
-### 1. Component Placement & Wiring
-* **Power Supply & Motor Installation:** The physical layout of the main power distribution (48V, 36V, 24V SMPS) alongside the NEMA23 Closed-Loop Stepper Motor and its driver.
+### 1. Electronics & Control Assembly
+* **ESP32 & Breakout Integration:** Real-world wiring and terminal block assignments on the main ESP32 development board.
 
-  <img src="real/powers and motor.jpeg" width="400" alt="Power Supply and Motor Placement">
+  <img src="real/esp32.jpeg" width="350" alt="ESP32 Controller Unit">
 
-* **Mobility & Chassis Support:** The real-world installation of the caster wheel, ensuring chassis mobility and proper leveling during operation.
-* 
-  <img src="real/caster.jpeg" width="400" alt="Caster Wheel Installation">
+* **Stepper Driver & Signal Cabling:** Industrial CS-D508 stepper motor driver wired to the motor phase lines and control bus.
 
-### 2. Operational Stages
+  <img src="real/driver-cable.jpeg" width="350" alt="CS-D508 Stepper Driver Wiring">
+
+* **Logic Level Shifting & RS485 Interface:** Breadboard-based signal conditioning circuits for level shifting and differential encoder communication.
+
+| Encoder Signal Converter | Signal Shifter (Far Side) |
+| :---: | :---: |
+| <img src="real/signal-converter(encoderside).jpeg" width="300" alt="Encoder Signal Converter"> | <img src="real/signal-converter-farside.jpeg" width="300" alt="Signal Converter Overview"> |
+
+---
+
+### 2. Mechanical Integration & Feedback System
+* **Rotary Encoder Assembly:** Direct shaft-coupled rotary encoder for mechanical feedback and position tracking.
+
+| Bed Encoder Mount | Dual Motor & Encoder Integration |
+| :---: | :---: |
+| <img src="real/encoder.jpeg" width="300" alt="Rotary Encoder Assembly"> | <img src="real/motor-encoder-place.jpeg" width="300" alt="Motor and Encoder Setup"> |
+
+* **Optical Homing Sensor:** Precision limit switch mounted near the rotating bed for absolute zero position validation.
+
+  <img src="real/red-sensor.jpeg" width="300" alt="Optical Limit Switch">
+
+* **Power Supply & Chassis Mobility:** Power stage distribution layout and structural support caster installation.
+
+| Power & Main Motor Setup | Chassis Caster Support |
+| :---: | :---: |
+| <img src="real/powers and motor.jpeg" width="300" alt="Power Supply Layout"> | <img src="real/caster.jpeg" width="300" alt="Caster Wheel Support"> |
+
+---
+
+### 3. Operational Stages
 * **Automated Nailing Process:** The end-effector mechanism drilling guidelines and precisely inserting pins/nails into the circular bed.
 
-| Nailing Assembly 1 | Nailing Assembly 2 | Nailing Mechanism |
+| Nailing Assembly 1 | Nailing Assembly 2 | Nailing Circuit |
 | :---: | :---: | :---: |
-| <img src="real/nailing1.jpeg" width="250" alt="Automated Nailing Process 1"> | <img src="real/nailing2.jpeg" width="250" alt="Automated Nailing Process 2"> | <img src="real/nailing3.jpeg" width="250" alt="Automated Nailing Process 3"> |
+| <img src="real/nailing1.jpeg" width="300" alt="Automated Nailing Process 1"> | <img src="real/nailing2.jpeg" width="300" alt="Automated Nailing Process 2"> | <img src="real/nailing3.jpeg" width="300" alt="Automated Nailing Process 3"> |
 
 * **String Weaving Process:** The automated routing of the string across the predefined coordinate paths.
 
-  <img src="real/stringing.jpeg" width="400" alt="String Weaving Process">
-
----
+  <img src="real/stringing.jpeg" width="350" alt="String Weaving Process">
 
 ## Software Architecture & Algorithm Breakdown
 
