@@ -181,13 +181,15 @@ This section documents the physical construction of the String Art machine, show
   <img src="real/caster.jpeg" width="400" alt="Caster Wheel Installation">
 
 ### 2. Operational Stages
-* **Automated Nailing Process:** The end-effector drilling and placing nails into the table bed.
-* 
-  <img src="components/real_nailing_process.jpg" width="400" alt="Automated Nailing Process">
+* **Automated Nailing Process:** The end-effector mechanism drilling guidelines and precisely inserting pins/nails into the circular bed.
+
+| Nailing Assembly 1 | Nailing Assembly 2 | Nailing Mechanism |
+| :---: | :---: | :---: |
+| <img src="real/nailing.jpeg" width="250" alt="Automated Nailing Process 1"> | <img src="real/stringing2.jpeg" width="250" alt="Automated Nailing Process 2"> | <img src="components/nailing3.jpeg" width="250" alt="Automated Nailing Process 3"> |
 
 * **String Weaving Process:** The automated routing of the string across the predefined coordinate paths.
-* 
-  <img src="components/real_stringing_process.jpg" width="400" alt="String Weaving Process">
+
+  <img src="real/stringing.jpeg" width="400" alt="String Weaving Process">
 
 ---
 
