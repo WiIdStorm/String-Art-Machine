@@ -185,7 +185,7 @@ This section documents the physical construction of the String Art machine, show
 
 | Nailing Assembly 1 | Nailing Assembly 2 | Nailing Mechanism |
 | :---: | :---: | :---: |
-| <img src="real/nailing.jpeg" width="250" alt="Automated Nailing Process 1"> | <img src="real/stringing2.jpeg" width="250" alt="Automated Nailing Process 2"> | <img src="components/nailing3.jpeg" width="250" alt="Automated Nailing Process 3"> |
+| <img src="real/nailing1.jpeg" width="250" alt="Automated Nailing Process 1"> | <img src="real/nailing2.jpeg" width="250" alt="Automated Nailing Process 2"> | <img src="real/nailing3.jpeg" width="250" alt="Automated Nailing Process 3"> |
 
 * **String Weaving Process:** The automated routing of the string across the predefined coordinate paths.
 
